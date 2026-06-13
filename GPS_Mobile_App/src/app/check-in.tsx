@@ -1,4 +1,5 @@
 import * as Location from "expo-location";
+import Toast from "react-native-toast-message";
 import { useState } from "react";
 import {
   View,
@@ -7,6 +8,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import { BASE_URL } from "../../config";
 
 export default function CheckInScreen() {
 
@@ -40,47 +42,45 @@ export default function CheckInScreen() {
 
   const checkIn = async () => {
     try {
+      const response = await fetch(`${BASE_URL}/visits/check-in/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+        customer_id: parseInt(customerId),
+        sales_rep_id: parseInt(salesRepId),
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      }),
+    });
 
-      const response = await fetch(
-        "http://10.167.137.110:8000/visits/check-in/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            customer_id: parseInt(customerId),
-            sales_rep_id: parseInt(salesRepId),
-            latitude: parseFloat(latitude),
-            longitude: parseFloat(longitude),
-          }),
-        }
-      );
+    const data = await response.json();
+    console.log(data);
 
-      const data = await response.json();
-
-      console.log(data);
-
-      if (data.success) {
-        Alert.alert(
-          "Success",
-          `Distance: ${data.distance} meters`
-        );
-      } else {
-        Alert.alert(
-          "Failed",
-          data.message
-        );
-      }
-
-    } catch (error) {
-      console.log(error);
-      Alert.alert(
-        "Error",
-        "Unable to check in"
-      );
+    if (data.success) {
+      Toast.show({
+        type: "success",
+        text1: "Check-In Successful",
+        text2: `Distance: ${data.distance} meters`,
+      });
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Check-In Denied",
+        text2: data.message,
+      });
     }
-  };
+  } catch (error) {
+    console.log(error);
+    Toast.show({
+      type: "error",
+      text1: "Network Error",
+      text2: "Unable to connect to server",
+    });
+  }
+};
 
   return (
     <View style={styles.container}>
@@ -110,7 +110,7 @@ export default function CheckInScreen() {
       <TextInput
         placeholder="Longitude"
         value={longitude}
-        onChangeText={setLatitude}
+        onChangeText={setLongitude}
         //editable={false}
         style={styles.input}
       />

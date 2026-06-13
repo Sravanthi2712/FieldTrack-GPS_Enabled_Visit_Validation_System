@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Toast from "react-native-toast-message"
 import {
   View,
   TextInput,
@@ -6,6 +7,7 @@ import {
   StyleSheet,
   Alert,
 } from "react-native";
+import { BASE_URL } from "../../config";
 
 export default function SalesRepresentativeScreen() {
 
@@ -17,7 +19,7 @@ export default function SalesRepresentativeScreen() {
     try {
 
       const response = await fetch(
-        "http://10.167.137.110:8000/sales-representatives/",
+        `${BASE_URL}/sales-representatives/`,
         {
           method: "POST",
           headers: {
@@ -37,10 +39,11 @@ export default function SalesRepresentativeScreen() {
 
       if (response.ok) {
 
-        Alert.alert(
-          "Success",
-          "Sales Representative Created"
-        );
+        Toast.show({
+          type: "success",
+          text1: "Success",
+          text2: "Sales Representative created successfully",
+        });
 
         setName("");
         setEmail("");

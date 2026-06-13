@@ -32,12 +32,22 @@ class CheckInView(APIView):
 
         data = serializer.validated_data
 
-        customer = Customer.objects.get(
+        customer = Customer.objects.filter(
             id=data["customer_id"]
+        ).first()
+
+        if not customer:
+            return Response(
+                {"success": False, "message": "Customer not found"},status=404
         )
 
-        sales_rep = SalesRepresentative.objects.get(
-            id=data["sales_rep_id"]
+        sales_rep = SalesRepresentative.objects.filter(
+            id=data.get("sales_rep_id")
+        ).first()
+
+        if not sales_rep:
+            return Response(
+                {"success": False, "message": "Sales Representative not found"},status=404
         )
 
         distance = calculate_distance(

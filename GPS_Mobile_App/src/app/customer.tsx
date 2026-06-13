@@ -1,5 +1,7 @@
 import * as Location from "expo-location";
+import Toast from "react-native-toast-message";
 import { useState } from "react";
+import { BASE_URL } from "../../config";
 import {
   View,
   TextInput,
@@ -72,7 +74,7 @@ export default function CustomerScreen() {
   const createCustomer = async () => {
   try {
     const response = await fetch(
-      "http://10.167.137.110:8000/customers/",
+      `${BASE_URL}/customers/`,
       {
         method: "POST",
         headers: {
@@ -91,19 +93,21 @@ export default function CustomerScreen() {
     console.log(data);
 
     if (response.ok) {
-      Alert.alert(
-        "Success",
-        "Customer Created Successfully"
-      );
+      Toast.show({
+        type: "success",
+        text1: "Success",
+        text2: "Customer created successfully",
+      });
 
       setName("");
       setLatitude("");
       setLongitude("");
     } else {
-      Alert.alert(
-        "Error",
-        JSON.stringify(data)
-      );
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: data.message || "Something went wrong",
+      });
     }
   } catch (error) {
     console.log(error);
