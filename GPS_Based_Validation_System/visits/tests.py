@@ -17,8 +17,6 @@ class CheckInAPITest(APITestCase):
 
         self.sales_rep = SalesRepresentative.objects.create(
             name="Sai",
-            email="sai@gmail.com",
-            password="123456"
         )
 
     def test_valid_checkin(self):

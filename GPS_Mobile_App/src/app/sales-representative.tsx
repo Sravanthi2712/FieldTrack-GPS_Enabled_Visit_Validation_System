@@ -79,21 +79,6 @@ export default function SalesRepresentativeScreen() {
         style={styles.input}
       />
 
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        style={styles.input}
-        secureTextEntry={true}
-      />
 
       <Button
         title="Create Sales Representative"

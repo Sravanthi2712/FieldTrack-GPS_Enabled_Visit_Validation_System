@@ -8,8 +8,6 @@ class SalesRepresentativeAPITest(APITestCase):
 
         data = {
             "name": "Sai",
-            "email": "sai@gmail.com",
-            "password": "123456"
         }
 
         response = self.client.post(

@@ -58,11 +58,14 @@ class CheckInView(APIView):
         )
 
         if distance > 200:
-            return Response({
+            return Response(
+            {
                 "success": False,
                 "distance": round(distance, 2),
                 "message": "Check-in allowed only within 200 meters"
-            })
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
 
         Visit.objects.create(
             sales_rep=sales_rep,
