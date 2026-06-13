@@ -1,0 +1,35 @@
+# React Native / Expo
+GPS_Mobile_App/node_modules/
+GPS_Mobile_App/.expo/
+GPS_Mobile_App/dist/
+GPS_Mobile_App/web-build/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+db.sqlite3
+*.log
+media/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# Environment Variables
+.env
+.env.*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Build files
+build/
+dist/
