@@ -103,11 +103,17 @@ export default function CustomerScreen() {
       setLatitude("");
       setLongitude("");
     } else {
-      Toast.show({
-        type: "error",
-        text1: "Error",
-        text2: data.message || "Something went wrong",
-      });
+      const errorMessage = Object.entries(data)
+    .map(([field, errors]) => `${field}: ${errors.join(", ")}`)
+    .join(" | ");
+
+  Toast.show({
+    type: "error",
+    text1: "Validation Error",
+    text2: errorMessage,
+  });
+
+  return;
     }
   } catch (error) {
     console.log(error);
