@@ -195,7 +195,7 @@ All endpoints (except login/register) require passing the JWT token in the heade
 | **GET** | `/sales-representatives/dashboard-stats/` | Admin & Sales Rep | Fetch summary statistics for the dashboard |
 
 > [!NOTE]
-> Detailed JSON payloads and response structures are available in the [API_DOCUMENTATION.md](file:///E:/FieldTrack/API_DOCUMENTATION.md) file.
+> Detailed JSON payloads and response structures are available in the [API_DOCUMENTATION.md](API_DOCUMENTATION.md) file.
 
 ---
 
@@ -212,6 +212,6 @@ The test suite validates:
 
 ---
 
-## Contact & Author
+## Author
 
-* **Developer:** Sravanthi Lakkaraju
+ Sravanthi Lakkaraju
