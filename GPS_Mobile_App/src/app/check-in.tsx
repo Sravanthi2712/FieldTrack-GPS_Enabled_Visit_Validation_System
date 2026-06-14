@@ -22,10 +22,10 @@ export default function CheckInScreen() {
 
   const [customers, setCustomers] = useState<{ id: number; name: string }[]>([]);
   const [salesReps, setSalesReps] = useState<{ id: number; name: string }[]>([]);
-  
+
   const [customerSearch, setCustomerSearch] = useState("");
   const [salesRepSearch, setSalesRepSearch] = useState("");
-  
+
   const [showCustomerDropdown, setShowCustomerDropdown] = useState(false);
   const [showSalesRepDropdown, setShowSalesRepDropdown] = useState(false);
 
@@ -104,44 +104,44 @@ export default function CheckInScreen() {
     }
     try {
       const response = await fetch(`${BASE_URL}/visits/check-in/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-        customer_id: parseInt(customerId),
-        sales_rep_id: parseInt(salesRepId),
-        latitude: parseFloat(latitude),
-        longitude: parseFloat(longitude),
-      }),
-    });
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            customer_id: parseInt(customerId),
+            sales_rep_id: parseInt(salesRepId),
+            latitude: parseFloat(latitude),
+            longitude: parseFloat(longitude),
+          }),
+        });
 
-    const data = await response.json();
-    console.log(data);
+      const data = await response.json();
+      console.log(data);
 
-    if (data.success) {
-      Toast.show({
-        type: "success",
-        text1: "Check-In Successful",
-        text2: `Distance: ${data.distance} meters`,
-      });
-    } else {
+      if (data.success) {
+        Toast.show({
+          type: "success",
+          text1: "Check-In Successful",
+          text2: `Distance: ${data.distance} meters`,
+        });
+      } else {
+        Toast.show({
+          type: "error",
+          text1: "Check-In Denied",
+          text2: data.message,
+        });
+      }
+    } catch (error) {
+      console.log(error);
       Toast.show({
         type: "error",
-        text1: "Check-In Denied",
-        text2: data.message,
+        text1: "Network Error",
+        text2: "Unable to connect to server",
       });
     }
-  } catch (error) {
-    console.log(error);
-    Toast.show({
-      type: "error",
-      text1: "Network Error",
-      text2: "Unable to connect to server",
-    });
-  }
-};
+  };
 
   return (
     <View style={styles.container}>
@@ -149,7 +149,7 @@ export default function CheckInScreen() {
       <View style={[styles.fieldContainer, { zIndex: 10 }]}>
         <Text style={styles.label}>Customer</Text>
         <TextInput
-          placeholder="Type Customer Name to select..."
+          placeholder="Enter customer Name.."
           value={customerSearch}
           onChangeText={(text) => {
             setCustomerSearch(text);
@@ -195,7 +195,7 @@ export default function CheckInScreen() {
       <View style={[styles.fieldContainer, { zIndex: 5 }]}>
         <Text style={styles.label}>Sales Representative</Text>
         <TextInput
-          placeholder="Type Sales Rep Name to select..."
+          placeholder="Enter SalesRep Name..."
           value={salesRepSearch}
           onChangeText={(text) => {
             setSalesRepSearch(text);
