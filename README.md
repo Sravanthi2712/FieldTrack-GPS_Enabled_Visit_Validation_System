@@ -190,12 +190,15 @@ Scan the QR code using Expo Go.
 
 ## API Endpoints
 
-| Method | Endpoint                |
-| ------ | ----------------------- |
-| POST   | /customers/             |
-| POST   | /sales-representatives/ |
-| POST   | /visits/check-in/       |
-| GET    | /visits/                |
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| POST   | /customers/ | Create Customer |
+| POST   | /checkin/ | Check-in Validation (Direct Endpoint) |
+| POST   | /visits/check-in/ | Check-in Validation (Nested Endpoint) |
+| GET    | /visits/ | Retrieve Visit History |
+| POST   | /sales-representatives/ | Create Sales Rep Record (Admin only) |
+| POST   | /sales-representatives/register/ | User Registration |
+| POST   | /sales-representatives/login/ | User Login / JWT generation |
 
 Detailed endpoint documentation is available in:
 
@@ -233,6 +236,14 @@ Implemented Tests:
 
 ---
 
+### Security & Access Control
+
+* Secure Login and Registration forms.
+* JWT (JSON Web Token) Authentication for all API endpoints.
+* Role-Based Access Control (RBAC) separating Administrator actions (creating customers, creating sales representatives, viewing all visit logs) from Sales Representative actions (creating customers, GPS check-ins, viewing own history).
+
+----
+
 ## Assumptions
 
 * Customer coordinates are accurate.
@@ -244,9 +255,6 @@ Implemented Tests:
 
 ## Future Enhancements
 
-* JWT Authentication
-* Login and Signup
-* Role-Based Access Control
 * Analytics Dashboard
 * Search and Filter Functionality
 * Visit Reports Export

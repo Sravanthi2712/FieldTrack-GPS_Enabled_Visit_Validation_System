@@ -28,7 +28,7 @@ class VisitSerializer(serializers.ModelSerializer):
 
 
 class CheckInSerializer(serializers.Serializer):
-    sales_rep_id = serializers.IntegerField()
+    sales_rep_id = serializers.IntegerField(required=False, allow_null=True)
     customer_id = serializers.IntegerField()
 
     latitude = serializers.FloatField(
