@@ -8,6 +8,20 @@ The system calculates the distance between the customer's registered location an
 
 ---
 
+## Submission Branch
+
+The completed assignment solution is available in the final-assignment branch.
+
+Repository:
+https://github.com/Sravanthi2712/FieldTrack
+
+Direct Branch Link:
+https://github.com/Sravanthi2712/FieldTrack/tree/final-assignment
+
+Please review the implementation from the final-assignment branch, which contains the final submitted version of the GPS-Based Visit Validation System.
+
+---
+
 ## Features
 
 ### Customer Management
